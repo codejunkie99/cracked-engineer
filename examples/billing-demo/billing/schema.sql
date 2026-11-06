@@ -1,0 +1,16 @@
+CREATE TABLE IF NOT EXISTS payment_events (
+  event_id TEXT PRIMARY KEY,
+  received_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS ledger_entries (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  event_id TEXT NOT NULL,
+  user_id TEXT NOT NULL,
+  amount_cents INTEGER NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS plans (
+  user_id TEXT PRIMARY KEY,
+  plan TEXT NOT NULL
+);

@@ -1,0 +1,11 @@
+diff --git a/billing/events.py b/billing/events.py
+index 847c9a3..6556295 100644
+--- a/billing/events.py
++++ b/billing/events.py
+@@ -36,5 +36,5 @@ def handle_payment_event(db, event):
+ 
+ 
+ def current_plan(db, user_id):
+-    row = db.execute("SELECT plan FROM plans WHERE user_id = ?", (user_id,)).fetchone()
++    row = db.execute(f"SELECT plan FROM plans WHERE user_id = '{user_id}'").fetchone()
+     return row[0] if row else "free"

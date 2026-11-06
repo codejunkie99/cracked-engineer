@@ -1,0 +1,4 @@
+# One row per red test. Fields are separated by tabs.
+# id: snake_case name. rule: the SYSTEM.md rule ID. cmd: a shell command that exits 0 while the rule holds.
+# break: the patch that plants the fault. expect: text the check must print when it fails, or -. fast: yes to run in the stop hook.
+id	rule	cmd	break	expect	fast

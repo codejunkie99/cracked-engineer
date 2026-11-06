@@ -1,0 +1,50 @@
+[
+  {
+    "id": "intake-feed",
+    "skills": ["cracked-engineer"],
+    "query": "/cracked-engineer Build a community feed app. Users can post, follow people, and see a home timeline of posts from people they follow. Posts can be public or followers-only. Send a push notification when someone you follow posts. Add a paid pro plan with the payment provider.",
+    "files": [],
+    "setup": "An empty git repository with one commit.",
+    "expected_behavior": [
+      "Picks intake mode and says why in one line.",
+      "Writes no application code before the user approves the intake.",
+      "Labels every number in intake and targets MEASURED, TARGET, GUESS, or DERIVED, and shows the back-of-the-envelope math.",
+      "Computes the concurrency floor with Little's law and does not call it a pool size.",
+      "Marks each of the 12 concepts decided or skip with a reason.",
+      "Lists the Own decisions (RPO and RTO, p99 TARGET, consistency for money, any new datastore) with options and a default, then stops for review."
+    ]
+  },
+  {
+    "id": "change-webhook",
+    "skills": ["cracked-engineer"],
+    "query": "/cracked-engineer Add a webhook handler for refunds. A refund event reverses the ledger entry of its payment and moves the user back to the free plan.",
+    "files": ["examples/billing-demo"],
+    "setup": "Copy examples/billing-demo to a neutral path, run git init, commit, and run scripts/install.mjs. Run red_green.mjs --all once so R1 and R2 are proven.",
+    "expected_behavior": [
+      "Picks change mode, reads SYSTEM.md and the billing contract in MODULES.md first.",
+      "Adds a rule for refunds (each refund event applies at most once) with an enforcer and a level.",
+      "Writes the red test and its break patch before the handler, and shows the test failing before the code exists.",
+      "Does not edit the red test or the break patch after the handler is written.",
+      "Proves the new test with red_green.mjs, and the LOG row is PASS.",
+      "Updates the billing contract (public interface, promises) and writes an ADR for the contract change.",
+      "Ends with check_system.mjs --strict at 0 errors and a PR body in the PR template's shape."
+    ]
+  },
+  {
+    "id": "audit-tidepool",
+    "skills": ["cracked-engineer"],
+    "query": "/cracked-engineer audit this repo before we launch",
+    "files": ["evals/fixtures/tidepool"],
+    "setup": "Copy evals/fixtures/tidepool to a neutral path such as ~/work/tidepool, run git init, and commit. The candidate must not see this file or the evals folder.",
+    "expected_behavior": [
+      "Picks audit mode and changes no application code before approval.",
+      "Finds the webhook that applies a redelivered payment twice (app/webhooks.py), with a command that shows two ledger entries.",
+      "Finds the CDN rule that caches /posts/* publicly with no viewer in the cache key (deploy/cdn.yaml), so followers-only posts can reach strangers.",
+      "Finds the preview fetch with no timeout (app/previews.py), and the render path that waits on it.",
+      "Finds the unbounded notification queue and the swallowed send errors (app/notify.py).",
+      "Finds the agent role with ALL privileges and schema ownership (deploy/grants.sql).",
+      "Does not report the parameterized search query (app/search.py) as SQL injection.",
+      "Ranks the root fixes data loss, then money, then private data, then availability, and gives each finding a command and its output."
+    ]
+  }
+]

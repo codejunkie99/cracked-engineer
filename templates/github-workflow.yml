@@ -1,0 +1,20 @@
+name: cracked-engineer
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  design-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      # Add the setup your red tests need here: a language runtime, services, test data.
+      - name: Prove every red test
+        run: node .cracked/red_green.mjs --all
+      - name: Check SYSTEM.md, MODULES.md, and the proofs
+        run: node .cracked/check_system.mjs --strict

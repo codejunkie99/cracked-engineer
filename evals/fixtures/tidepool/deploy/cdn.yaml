@@ -1,0 +1,14 @@
+# Edge cache rules, applied by the deploy pipeline.
+rules:
+  - match: "/static/*"
+    cache: public
+    ttl_seconds: 86400
+  - match: "/posts/*"
+    cache: public
+    ttl_seconds: 300
+    cache_key:
+      include_query: false
+      include_headers: []
+      include_cookies: []
+  - match: "/api/*"
+    cache: bypass

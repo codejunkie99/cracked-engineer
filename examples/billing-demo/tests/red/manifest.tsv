@@ -1,0 +1,6 @@
+# One row per red test. Fields are separated by tabs.
+# id: snake_case name. rule: the SYSTEM.md rule ID. cmd: a shell command that exits 0 while the rule holds.
+# break: the patch that plants the fault. expect: text the check must print when it fails, or -. fast: yes to run in the stop hook.
+id	rule	cmd	break	expect	fast
+event_applies_once	R1	python3 -m unittest -q tests.red.test_event_applies_once	tests/red/breaks/event_applies_once.patch	ledger has 5 entries; expected 1	yes
+no_string_sql	R2	python3 tools/no_string_sql.py billing	tests/red/breaks/no_string_sql.patch	SQL built from a string	yes

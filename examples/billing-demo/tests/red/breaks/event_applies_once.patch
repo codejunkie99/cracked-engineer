@@ -1,0 +1,11 @@
+diff --git a/billing/schema.sql b/billing/schema.sql
+index 9032254..2a60a1a 100644
+--- a/billing/schema.sql
++++ b/billing/schema.sql
+@@ -1,5 +1,5 @@
+ CREATE TABLE IF NOT EXISTS payment_events (
+-  event_id TEXT PRIMARY KEY,
++  event_id TEXT NOT NULL,
+   received_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+ );
+ 
